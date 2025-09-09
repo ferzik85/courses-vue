@@ -1,5 +1,5 @@
 function formatDate(date: string | null): string {
-	return date?.replaceAll('/', '.') ?? '';
+	return date ? date.replace(/\//g, '.') : '';
 }
 
 export default formatDate;
