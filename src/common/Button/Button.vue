@@ -2,7 +2,7 @@
 export type ButtonType = 'button' | 'submit' | 'reset';
 export interface ButtonProps {
 	label: string;
-	onClick: (event: Event) => void;
+	onClick?: (event: Event) => void;
 	type?: ButtonType;
 	formName?: string;
 	className?: string;

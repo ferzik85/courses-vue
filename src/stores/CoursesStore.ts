@@ -5,7 +5,7 @@ import { addCourseApiAsync } from "../api/Courses/AddCourse";
 import { deleteCourseApiAsync } from "../api/Courses/DeleteCourse";
 import { updateCourseApiAsync } from "../api/Courses/UpdateCourse";
 import { userTokenIsSet, getUserToken } from "../localStorage/StorageAccess";
-import { useAuthorStore } from "./authorStore";
+import { useAuthorStore } from "./AuthorStore";
 
 export interface Course {
   id: string;
