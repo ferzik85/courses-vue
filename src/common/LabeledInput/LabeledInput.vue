@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Input from '../Input/Input.vue';
 import TextArea from '../TextArea/TextArea.vue';
+import { computed } from 'vue'
 
 export interface LabeledInputProps {
 	name: string;
@@ -12,10 +13,10 @@ export interface LabeledInputProps {
 }
 
 const props = defineProps<LabeledInputProps>()
-const defaultClassNames = 'labelInput ' + props.inputClassName;
-const errorClassNames = 'labelInput ' + props.inputClassName + ' errorBorder';
-const assignInputClasses = props.isInvalid ? errorClassNames : defaultClassNames;
-
+const assignInputClasses = computed(() =>
+  (props.isInvalid ? 'labelInput errorBorder' : 'labelInput') +
+  (props.inputClassName ? ' ' + props.inputClassName : '')
+)
 </script>
 
 <template>

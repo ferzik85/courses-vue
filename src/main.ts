@@ -1,16 +1,15 @@
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
-//import router from './router'
-import App from './App.vue'
-import './style.css'
+import router from './router'
+import Layout from './components/Layout/Layout.vue'
 import { useAuthorStore } from './stores/AuthorStore'
 import { useCourseStore } from './stores/CoursesStore'
 
 const pinia = createPinia()
-const app = createApp(App)
-app.use(pinia)
-//app.use(router)
+const application = createApp(Layout)
+application.use(pinia)
+application.use(router)
 useAuthorStore().loadAuthorsAsync();
 useCourseStore().loadCoursesAsync();
 
-app.mount('#app')
+application.mount('#root')

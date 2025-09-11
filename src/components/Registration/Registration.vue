@@ -50,7 +50,7 @@ async function handleSubmit(e: Event) {
 	<div class="reg">
 		<b class="regHeader">Registration</b>
 		<div class="regBody">
-			<form @onSubmit.prevent="handleSubmit" class="regForm">
+			<form @submit.prevent="handleSubmit" class="regForm">
 				<LabeledInput :name="'Name'" :value="name" :isInvalid="nameIsInvalid" :onChange="handleNameChange"
 					:inputClassName="'regInput'" />
 				<LabeledInput :name="'Email'" :value="email" :isInvalid="emailIsInvalid" :onChange="handleEmailChange"
@@ -60,7 +60,7 @@ async function handleSubmit(e: Event) {
 				<Button :label="'REGISTER'" :type="'submit'" :className="'regButton'" ></Button>
 			</form>
 			<div class="regHelp">
-				If you have an account you may&nbsp;
+				If you have an account you may
 				<RouterLink to="/login"><b>Login</b></RouterLink>
 			</div>
 		</div>
@@ -102,7 +102,7 @@ async function handleSubmit(e: Event) {
 	margin-bottom: 0;
 }
 
-.regInput {
+:deep(.regInput) {
 	width: 266px;
 }
 

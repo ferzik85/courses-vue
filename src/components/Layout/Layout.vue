@@ -4,5 +4,5 @@ import Header from '../Header/Header.vue';
 
 <template>
 	<Header></Header>
-	Outlet
+	<RouterView />
 </template>

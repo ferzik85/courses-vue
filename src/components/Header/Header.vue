@@ -6,7 +6,7 @@ import logo from '../../assets/epam-logo.svg';
 import { useUserStore } from "../../stores/UserStore";
 const tokenIsSet = userTokenIsSet();
 const userStore = useUserStore();
-const user = userStore.userName;
+const userName = userStore.userName;
 const router = useRouter()
 const logout = () => {
 	userStore.logoutAsync().then(() => {
@@ -17,12 +17,12 @@ const logout = () => {
 
 <template>
 	<div class="header">
-		<div class="logo">
-			<img class="logo" :src="logo" alt="epam logo" />;
+		<div class="logoWrapper">
+			<img class="logo" :src="logo" alt="epam logo" />
 		</div>
 		<div class="title">COURSES</div>
 		<div v-if="tokenIsSet" class="button">
-			<span>{{ user }}</span>
+			<span>{{ userName }}</span>
 			<Button :label="'LOGOUT'" :onClick="logout"></Button>
 		</div>
 	</div>
@@ -40,7 +40,7 @@ const logout = () => {
 	margin-bottom: 0;
 }
 
-.logo {
+.logoWrapper {
 	display: flex;
 	margin-right: 10px;
 	margin-left: 10px;

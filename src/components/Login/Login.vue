@@ -68,7 +68,7 @@ async function handleSubmit(e: Event) {
   <div class="login">
     <b class="loginHeader">Login</b>
     <div class="loginBody">
-      <form @onSubmit.prevent="handleSubmit" class="loginForm">
+      <form @submit.prevent="handleSubmit" class="loginForm">
         <LabeledInput name="Email" :value="email" :isInvalid="emailIsInvalid" @change="handleEmailChange"
           :inputClassName="'loginInput'" />
         <LabeledInput name="Password" :value="password" :isInvalid="passwordIsInvalid" @change="handlePasswordChange"
@@ -76,7 +76,7 @@ async function handleSubmit(e: Event) {
         <Button :label="'LOGIN'" :type="'submit'" :className="'loginButton'"></Button>
       </form>
       <div class="loginHelp">
-        If you don&apos;t have an account you may&nbsp;
+        If you don&apos;t have an account you may
         <RouterLink to="/registration"><b>Register</b></RouterLink>
       </div>
     </div>
@@ -120,7 +120,7 @@ async function handleSubmit(e: Event) {
   margin-bottom: 0;
 }
 
-.loginInput {
+:deep(.loginInput) {
   width: 266px;
 }
 
