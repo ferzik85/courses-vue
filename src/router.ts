@@ -1,15 +1,15 @@
 import { createMemoryHistory, createRouter } from "vue-router";
 
-import Login from "./components/Login/Login.vue";
-import Registration from "./components/Registration/Registration.vue";
-import App from "./components/App/App.vue";
+import LoginView from "./components/Login/LoginView.vue";
+import RegistrationView from "./components/Registration/RegistrationView.vue";
+import AppView from "./components/App/AppView.vue";
 
 const routes = [
-  { path: "/", component: Login },
-  { path: "/login", component: Login },
-  { path: "/registration", component: Registration },
-  { path: "/courses", component: App },
-  { path: "/:pathMatch(.*)*", component: Login }, // catch-all
+  { path: "/", component: LoginView },
+  { path: "/login", component: LoginView },
+  { path: "/registration", component: RegistrationView },
+  { path: "/courses", component: AppView },
+  { path: "/:pathMatch(.*)*", component: LoginView }, // catch-all
 ];
 
 const router = createRouter({

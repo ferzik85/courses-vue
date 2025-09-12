@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Input from "../Input/Input.vue";
-import TextArea from "../TextArea/TextArea.vue";
+import InputView from "../Input/InputView.vue";
+import TextAreaView from "../TextArea/TextAreaView.vue";
 import { computed } from "vue";
 
 export interface LabeledInputProps {
@@ -24,13 +24,13 @@ const assignInputClasses = computed(
   <label class="label">
     {{ props.name }}
     <div>
-      <TextArea
+      <TextAreaView
         v-if="props.isTextArea"
         :value="value"
         :on-change="props.onChange"
         :class-name="assignInputClasses"
-      ></TextArea>
-      <Input
+      ></TextAreaView>
+      <InputView
         v-else
         :value="value"
         :on-change="props.onChange"

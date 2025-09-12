@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed } from "vue";
-import Input from "../Input/Input.vue";
-import Duration from "../Duration/Duration.vue";
+import InputView from "../Input/InputView.vue";
+import DurationView from "../Duration/DurationView.vue";
 import validateDuration from "../../utils/ValidateDuration";
 
 export interface DurationInputProps {
@@ -31,12 +31,12 @@ const inputClasses = computed<string>(() => {
   <label class="duration">
     {{ props.name }}
     <div>
-      <Input
+      <InputView
         :value="duration"
         :on-change="handleChange"
         :class-name="inputClasses"
       />
-      <Duration
+      <DurationView
         :duration="validateDuration(duration) ? duration : 0"
         :class-name="'durationHours'"
       />

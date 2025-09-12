@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Button from "../../common/Button/Button.vue";
-import LabeledInput from "../../common/LabeledInput/LabeledInput.vue";
+import ButtonView from "../../common/Button/ButtonView.vue";
+import LabeledInputView from "../../common/LabeledInput/LabeledInputView.vue";
 import {
   validateInput,
   validateEmail,
@@ -59,32 +59,32 @@ async function handleSubmit(e: Event) {
     <b class="regHeader">Registration</b>
     <div class="regBody">
       <form class="regForm" @submit.prevent="handleSubmit">
-        <LabeledInput
+        <LabeledInputView
           :name="'Name'"
           :value="name"
           :is-invalid="nameIsInvalid"
           :on-change="handleNameChange"
           :input-class-name="'regInput'"
         />
-        <LabeledInput
+        <LabeledInputView
           :name="'Email'"
           :value="email"
           :is-invalid="emailIsInvalid"
           :on-change="handleEmailChange"
           :input-class-name="'regInput'"
         />
-        <LabeledInput
+        <LabeledInputView
           :name="'Password'"
           :value="password"
           :is-invalid="passwordIsInvalid"
           :on-change="handlePasswordChange"
           :input-class-name="'regInput'"
         />
-        <Button
+        <ButtonView
           :label="'REGISTER'"
           :type="'submit'"
           :class-name="'regButton'"
-        ></Button>
+        ></ButtonView>
       </form>
       <div class="regHelp">
         If you have an account you may

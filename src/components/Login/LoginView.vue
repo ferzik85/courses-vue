@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import Button from "../../common/Button/Button.vue";
-import LabeledInput from "../../common/LabeledInput/LabeledInput.vue";
+import ButtonView from "../../common/Button/ButtonView.vue";
+import LabeledInputView from "../../common/LabeledInput/LabeledInputView.vue";
 import { validateEmail, validatePassword } from "../../utils/ValidateInput";
 import {
   putUser as addUserToLocalStorage,
@@ -72,25 +72,25 @@ async function handleSubmit(e: Event) {
     <b class="loginHeader">Login</b>
     <div class="loginBody">
       <form class="loginForm" @submit.prevent="handleSubmit">
-        <LabeledInput
+        <LabeledInputView
           name="Email"
           :value="email"
           :is-invalid="emailIsInvalid"
           :input-class-name="'loginInput'"
           @change="handleEmailChange"
         />
-        <LabeledInput
+        <LabeledInputView
           name="Password"
           :value="password"
           :is-invalid="passwordIsInvalid"
           :input-class-name="'loginInput'"
           @change="handlePasswordChange"
         />
-        <Button
+        <ButtonView
           :label="'LOGIN'"
           :type="'submit'"
           :class-name="'loginButton'"
-        ></Button>
+        ></ButtonView>
       </form>
       <div class="loginHelp">
         If you don&apos;t have an account you may

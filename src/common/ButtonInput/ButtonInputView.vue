@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
-import Input from "../Input/Input.vue";
-import Button from "../Button/Button.vue";
+import InputView from "../Input/InputView.vue";
+import ButtonView from "../Button/ButtonView.vue";
 
 export interface ButtonInputProps {
   labelName: string;
@@ -19,6 +19,7 @@ const handleChange = (value: string) => {
   invalid.value = false;
 };
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const handleClick = (_: Event) => {
   invalid.value = !props.validateInput(val.value);
   // possibly a bug somewhere here
@@ -38,14 +39,14 @@ const inputClasses = computed<string>(() => {
   <label class="label">
     {{ props.labelName }}
     <div>
-      <Input :value="val" :on-change="handleChange" :class-name="inputClasses">
-      </Input>
-      <Button
+      <InputView :value="val" :on-change="handleChange" :class-name="inputClasses">
+      </InputView>
+      <ButtonView
         :label="props.buttonName"
         :on-click="handleClick"
         :class-name="'labelButton'"
       >
-      </Button>
+      </ButtonView>
     </div>
     <p v-if="invalid" class="error">{{ props.labelName }} is required.</p>
   </label>

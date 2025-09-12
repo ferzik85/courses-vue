@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { useRouter } from "vue-router";
-import Button from "../../common/Button/Button.vue";
+import ButtonView from "../../common/Button/ButtonView.vue";
 import { userTokenIsSet } from "../../localStorage/StorageAccess";
 import logo from "../../assets/epam-logo.svg";
 import { useUserStore } from "../../stores/UserStore";
@@ -23,7 +23,7 @@ const logout = () => {
     <div class="title">COURSES</div>
     <div v-if="tokenIsSet" class="button">
       <span>{{ userName }}</span>
-      <Button :label="'LOGOUT'" :on-click="logout"></Button>
+      <ButtonView :label="'LOGOUT'" :on-click="logout"></ButtonView>
     </div>
   </div>
 </template>
