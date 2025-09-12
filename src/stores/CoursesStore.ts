@@ -28,7 +28,7 @@ export const useCourseStore = defineStore("courseStore", () => {
       authors: course.authors.map(
         (authorId) =>
           authors.find((author) => author.id === authorId)?.name ??
-          "Unknown author"
+          "Unknown author",
       ),
     }));
   });
@@ -36,7 +36,7 @@ export const useCourseStore = defineStore("courseStore", () => {
   const getCourseWithAuthorName = (courseId: string) => {
     return (
       getCoursesWithAuthorNames.value.find(
-        (course) => course.id === courseId
+        (course) => course.id === courseId,
       ) ?? null
     );
   };
@@ -78,7 +78,7 @@ export const useCourseStore = defineStore("courseStore", () => {
       const result = await updateCourseApiAsync(token, course);
       if (result.ok && result.course) {
         courses.value = courses.value.map((oldCourse) =>
-          oldCourse.id === course.id ? course : oldCourse
+          oldCourse.id === course.id ? course : oldCourse,
         );
       }
     }

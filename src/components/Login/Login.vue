@@ -1,29 +1,29 @@
 <script setup lang="ts">
-import Button from '../../common/Button/Button.vue';
-import LabeledInput from '../../common/LabeledInput/LabeledInput.vue';
-import { validateEmail, validatePassword } from '../../utils/ValidateInput';
+import Button from "../../common/Button/Button.vue";
+import LabeledInput from "../../common/LabeledInput/LabeledInput.vue";
+import { validateEmail, validatePassword } from "../../utils/ValidateInput";
 import {
   putUser as addUserToLocalStorage,
   userTokenIsSet,
-  getUser
-} from '../../localStorage/StorageAccess';
-import { loginUserAsync } from '../../api/User/LoginUser';
-import { getMeAsync } from '../../api/User/GetMe';
+  getUser,
+} from "../../localStorage/StorageAccess";
+import { loginUserAsync } from "../../api/User/LoginUser";
+import { getMeAsync } from "../../api/User/GetMe";
 import { useUserStore } from "../../stores/UserStore";
 import type { User } from "../../stores/UserStore";
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from "vue";
+import { useRouter } from "vue-router";
 const userStore = useUserStore();
-const router = useRouter()
-const email = ref('')
-const password = ref('')
-const emailIsInvalid = ref(false)
-const passwordIsInvalid = ref(false)
+const router = useRouter();
+const email = ref("");
+const password = ref("");
+const emailIsInvalid = ref(false);
+const passwordIsInvalid = ref(false);
 
 const navigateToCourses = (useRedirect: boolean) => {
-  router.push('/courses');
+  router.push("/courses");
   //navigate('/courses', { replace: useRedirect });
-}
+};
 const saveUserToStore = (user: User) => userStore.login(user);
 
 // useEffect(() => {
@@ -50,7 +50,10 @@ async function handleSubmit(e: Event) {
   emailIsInvalid.value = invalidEmail;
   passwordIsInvalid.value = invalidPassword;
   if (invalidEmail || invalidPassword) return;
-  const userIsLoggedResponse = await loginUserAsync(email.value, password.value);
+  const userIsLoggedResponse = await loginUserAsync(
+    email.value,
+    password.value,
+  );
   if (userIsLoggedResponse.ok) {
     const me = await getMeAsync(userIsLoggedResponse.user!.token);
     if (me.ok) {
@@ -68,12 +71,26 @@ async function handleSubmit(e: Event) {
   <div class="login">
     <b class="loginHeader">Login</b>
     <div class="loginBody">
-      <form @submit.prevent="handleSubmit" class="loginForm">
-        <LabeledInput name="Email" :value="email" :isInvalid="emailIsInvalid" @change="handleEmailChange"
-          :inputClassName="'loginInput'" />
-        <LabeledInput name="Password" :value="password" :isInvalid="passwordIsInvalid" @change="handlePasswordChange"
-          :inputClassName="'loginInput'" />
-        <Button :label="'LOGIN'" :type="'submit'" :className="'loginButton'"></Button>
+      <form class="loginForm" @submit.prevent="handleSubmit">
+        <LabeledInput
+          name="Email"
+          :value="email"
+          :is-invalid="emailIsInvalid"
+          :input-class-name="'loginInput'"
+          @change="handleEmailChange"
+        />
+        <LabeledInput
+          name="Password"
+          :value="password"
+          :is-invalid="passwordIsInvalid"
+          :input-class-name="'loginInput'"
+          @change="handlePasswordChange"
+        />
+        <Button
+          :label="'LOGIN'"
+          :type="'submit'"
+          :class-name="'loginButton'"
+        ></Button>
       </form>
       <div class="loginHelp">
         If you don&apos;t have an account you may

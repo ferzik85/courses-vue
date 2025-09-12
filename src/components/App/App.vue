@@ -1,12 +1,12 @@
 <template>
   <div class="app">
-      <RouterView />
+    <RouterView />
   </div>
 </template>
 
 <style scoped>
 .app {
-	background-color: #f7f7f7;
-	flex-grow: 1;
+  background-color: #f7f7f7;
+  flex-grow: 1;
 }
 </style>

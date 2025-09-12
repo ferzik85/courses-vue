@@ -1,5 +1,5 @@
 function formatAuthors(authors: string[]): string {
-	return authors.join(', ');
+  return authors.join(", ");
 }
 
 export default formatAuthors;
