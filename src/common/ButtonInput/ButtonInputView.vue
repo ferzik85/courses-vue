@@ -39,7 +39,11 @@ const inputClasses = computed<string>(() => {
   <label class="label">
     {{ props.labelName }}
     <div>
-      <InputView :value="val" :on-change="handleChange" :class-name="inputClasses">
+      <InputView
+        :value="val"
+        :on-change="handleChange"
+        :class-name="inputClasses"
+      >
       </InputView>
       <ButtonView
         :label="props.buttonName"
