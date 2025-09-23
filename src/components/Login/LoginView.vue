@@ -11,7 +11,7 @@ import { loginUserAsync } from "../../api/User/LoginUser";
 import { getMeAsync } from "../../api/User/GetMe";
 import { useUserStore } from "../../stores/UserStore";
 import type { User } from "../../stores/UserStore";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 const userStore = useUserStore();
 const router = useRouter();
@@ -21,17 +21,23 @@ const emailIsInvalid = ref(false);
 const passwordIsInvalid = ref(false);
 
 const navigateToCourses = (useRedirect: boolean) => {
-  router.push("/courses");
-  //navigate('/courses', { replace: useRedirect });
+  router.push({ path: "/courses", replace: useRedirect });
 };
 const saveUserToStore = (user: User) => userStore.login(user);
 
-// useEffect(() => {
-// 	if (userTokenIsSet()) {
-// 		saveUserToStore(getUser());
-// 		navigateToCourses(true);
-// 	}
-// }, []);
+onMounted(() => {
+  if (userTokenIsSet()) {
+    const user = getUser();
+    saveUserToStore({
+      isAuth: true,
+      name: user.name,
+      email: user.email,
+      token: user.token,
+      role: user.role,
+    });
+    navigateToCourses(true);
+  }
+});
 
 const handleEmailChange = (value: string) => {
   email.value = value;

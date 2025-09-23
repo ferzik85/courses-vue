@@ -32,7 +32,7 @@ const inputClasses = computed<string>(() => {
     {{ props.name }}
     <div>
       <InputView
-        :value="duration"
+        :value="String(duration)"
         :on-change="handleChange"
         :class-name="inputClasses"
       />
