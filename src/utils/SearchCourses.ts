@@ -1,10 +1,10 @@
 import type { Course } from "../models/Course";
 
 function searchCourses(
-  value: string | null,
+  value: string,
   courses: readonly Course[],
 ): readonly Course[] {
-  if (value === null) return courses;
+  if (!value) return courses;
   const searchedValue = value.trim().toLowerCase();
   return courses.filter(
     (course) =>

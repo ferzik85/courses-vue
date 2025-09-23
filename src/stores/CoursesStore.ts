@@ -16,7 +16,7 @@ export interface Course {
   authors: string[];
 }
 
-export const useCourseStore = defineStore("courseStore", () => {
+export const useCoursesStore = defineStore("coursesStore", () => {
   const authorStore = useAuthorStore();
   const courses = ref([] as Course[]);
   const getCourses = computed(() => courses.value);

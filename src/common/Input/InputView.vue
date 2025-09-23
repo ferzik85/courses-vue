@@ -1,6 +1,6 @@
 <script setup lang="ts">
 export interface InputProps {
-  value?: any;
+  value?: string;
   onChange?: (value: string) => void;
   className?: string;
 }
