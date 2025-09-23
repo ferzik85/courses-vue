@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from "vue";
-import { useRouter } from "vue-router";
+import { ref, computed } from "vue";
+import { useRouter, useRoute } from "vue-router";
 import { useAuthorStore } from "../../stores/AuthorStore";
 import type { Author } from "../../stores/AuthorStore";
 import { useCoursesStore } from "../../stores/CoursesStore";
@@ -12,20 +12,23 @@ import { validateInput } from "../../utils/ValidateInput";
 import validateDuration from "../../utils/ValidateDuration";
 import AuthorItemView from "./components/AuthorItem/AuthorItemView.vue";
 const router = useRouter();
+const route = useRoute();
 const coursesStore = useCoursesStore();
 const authorStore = useAuthorStore();
 const formId = "courseCreateOrEditForm";
-const courseId = ""; // get course id from route params
-const isAddForm = courseId == null;
+const courseId = computed(() => route.params.courseId as string | undefined);
+const isAddForm = computed(() => !courseId.value);
 const authors = authorStore.getAuthors;
-const courseToEdit = coursesStore.getCourse(courseId); // problem with null
-const title = ref(courseToEdit?.title ?? "");
-const description = ref(courseToEdit?.description ?? "");
-const duration = ref(courseToEdit?.duration ?? "");
+const courseToEdit = computed(() =>
+  courseId.value ? coursesStore.getCourse(courseId.value) : null
+);
+const title = ref(courseToEdit.value?.title ?? "");
+const description = ref(courseToEdit.value?.description ?? "");
+const duration = ref(courseToEdit.value?.duration ?? "");
 const titleIsInvalid = ref(false);
 const descriptionIsInvalid = ref(false);
 const durationIsInvalid = ref(false);
-const courseAuthorIds = ref(courseToEdit?.authors ?? []);
+const courseAuthorIds = ref(courseToEdit.value?.authors ?? []);
 const courseAuthors = authors.filter((author) =>
   courseAuthorIds.value.includes(author.id),
 );
@@ -103,12 +106,12 @@ function handleSubmitCourse(e: Event) {
     duration: +duration.value,
     authors: [...courseAuthorIds.value],
   };
-  if (isAddForm) {
+  if (isAddForm.value) {
     coursesStore.addCourseAsync(course);
   } else {
     coursesStore.updateCourseAsync({
       ...course,
-      id: courseId,
+      id: courseId.value as string,
     });
   }
   router.push("/courses");

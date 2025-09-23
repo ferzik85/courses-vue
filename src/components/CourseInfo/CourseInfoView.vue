@@ -1,14 +1,18 @@
 <script setup lang="ts">
+import { useRoute } from "vue-router";
 import ButtonView from "../../common/Button/ButtonView.vue";
 import DurationView from "../../common/Duration/DurationView.vue";
 import formatDate from "../../utils/FormatDate";
 import formatAuthors from "../../utils/FormatAuthors";
 import { useCoursesStore } from "../../stores/CoursesStore";
-// get course Id from route
-const courseId = "";
+import { computed } from "vue";
 const coursesStore = useCoursesStore();
-const course = coursesStore.getCourseWithAuthorName(courseId);
-const courseIsFound = course != null;
+const route = useRoute();
+const courseId = computed(() => route.params.courseId as string | undefined);
+const course = computed(() =>
+  courseId.value ? coursesStore.getCourseWithAuthorName(courseId.value) : null
+);
+const courseIsFound = computed(() => course.value !== null);
 </script>
 
 <template>

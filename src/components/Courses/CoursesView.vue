@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import CourseCardView from "./components/CourseCard/CourseCardView.vue";
 import ButtonView from "../../common/Button/ButtonView.vue";
 import SearchBarView from "./components/SearchBar/SearchBarView.vue";
@@ -10,12 +10,15 @@ import { useUserStore } from "../../stores/UserStore";
 const coursesStore = useCoursesStore();
 const userStore = useUserStore();
 const coursesWithAuthorNames = coursesStore.getCoursesWithAuthorNames;
-const isAdmin = userStore.isAdmin;
+const isAdmin = computed(() => userStore.isAdmin);
 const searchText = ref("");
-const handleSearchClick = (searchValue: string) =>
-  (searchText.value = searchValue);
-const noCourses = coursesWithAuthorNames.length === 0;
-const filteredCourses = searchCourses(searchText.value, coursesWithAuthorNames);
+const handleSearchClick = (searchValue: string) => {
+  searchText.value = searchValue;
+};
+const noCourses = computed(() => coursesWithAuthorNames.length === 0);
+const filteredCourses = computed(() =>
+  searchCourses(searchText.value, coursesWithAuthorNames)
+);
 </script>
 <template>
   <div class="courses">
@@ -23,7 +26,7 @@ const filteredCourses = searchCourses(searchText.value, coursesWithAuthorNames);
     <template v-else>
       <div class="header">
         <SearchBarView :on-search-click="handleSearchClick" />
-        <RouterLink v-if="isAdmin" to="/add">
+        <RouterLink v-if="isAdmin" to="add">
           <ButtonView :label="'ADD NEW COURSE'" />
         </RouterLink>
       </div>
@@ -39,7 +42,6 @@ const filteredCourses = searchCourses(searchText.value, coursesWithAuthorNames);
       />
     </template>
   </div>
-  ;
 </template>
 <style scoped>
 .courses {

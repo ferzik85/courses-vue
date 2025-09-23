@@ -26,8 +26,8 @@ const handleEditCourse = () => router.push(`update/${props.id}`);
 <template>
   <div class="card">
     <div class="cardLeft">
-      <p class="title">{title}</p>
-      <p class="description">{description}</p>
+      <p class="title">{{props.title}}</p>
+      <p class="description">{{props.description}}</p>
     </div>
     <div class="cardRight">
       <div>
@@ -45,7 +45,7 @@ const handleEditCourse = () => router.push(`update/${props.id}`);
         </p>
       </div>
       <p class="cardButtons">
-        <RouterLink to="/id">
+        <RouterLink to="id">
           <ButtonView :label="'SHOW COURSE'" :class-name="'cardShowButton'" />
         </RouterLink>
         <ButtonView

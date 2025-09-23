@@ -3,7 +3,6 @@ import ButtonView from "../../common/Button/ButtonView.vue";
 import { useUserStore } from "../../stores/UserStore";
 const userStore = useUserStore();
 const isAdminUser = userStore.isAdmin;
-// fix routing issue
 </script>
 <template>
   <div class="emptyListRow">Your List Is Empty</div>
@@ -12,7 +11,7 @@ const isAdminUser = userStore.isAdmin;
       Please use &apos;Add New Course&apos; button to add your first course
     </div>
     <div class="emptyListRow">
-      <RouterLink to="/add">
+      <RouterLink to="add">
         <ButtonView label="ADD NEW COURSE" />
       </RouterLink>
     </div>
