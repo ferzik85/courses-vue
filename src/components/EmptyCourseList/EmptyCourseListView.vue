@@ -1,17 +1,18 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import ButtonView from "../../common/Button/ButtonView.vue";
 import { useUserStore } from "../../stores/UserStore";
 const userStore = useUserStore();
-const isAdminUser = userStore.isAdmin;
+const isAdminUser = computed(() => userStore.isAdmin);
 </script>
 <template>
-  <div class="emptyListRow">Your List Is Empty</div>
+  <div class="emptyListRow">Your List is Empty</div>
   <template v-if="isAdminUser">
     <div class="emptyListRow">
       Please use &apos;Add New Course&apos; button to add your first course
     </div>
     <div class="emptyListRow">
-      <RouterLink to="add">
+      <RouterLink :to="{ name: 'course-add'}">
         <ButtonView label="ADD NEW COURSE" />
       </RouterLink>
     </div>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { useRouter } from "vue-router";
 import ButtonView from "../../common/Button/ButtonView.vue";
-import { userTokenIsSet } from "../../localStorage/StorageAccess";
 import logo from "../../assets/epam-logo.svg";
 import { useUserStore } from "../../stores/UserStore";
-const tokenIsSet = userTokenIsSet();
 const userStore = useUserStore();
+const isAuth = computed(() => userStore.isAuth);
 const userName = userStore.userName;
 const router = useRouter();
 const logout = () => {
@@ -21,7 +21,7 @@ const logout = () => {
       <img class="logo" :src="logo" alt="epam logo" />
     </div>
     <div class="title">COURSES</div>
-    <div v-if="tokenIsSet" class="button">
+    <div v-if="isAuth" class="button">
       <span>{{ userName }}</span>
       <ButtonView :label="'LOGOUT'" :on-click="logout"></ButtonView>
     </div>

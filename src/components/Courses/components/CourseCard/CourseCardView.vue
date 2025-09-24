@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { computed } from "vue";
 import { useRouter } from "vue-router";
 import { useCoursesStore } from "../../../../stores/CoursesStore";
 import { useUserStore } from "../../../../stores/UserStore";
@@ -18,16 +19,16 @@ const props = defineProps<CourseCardProps>();
 const router = useRouter();
 const userStore = useUserStore();
 const coursesStore = useCoursesStore();
-const isAdmin = userStore.isAdmin;
+const isAdmin = computed(() => userStore.isAdmin);
 const handleDeleteCourse = () => coursesStore.deleteCourseAsync(props.id);
-const handleEditCourse = () => router.push(`update/${props.id}`);
+const handleEditCourse = () => router.push({ name: 'course-update', params: { id: props.id } });
 </script>
 
 <template>
   <div class="card">
     <div class="cardLeft">
-      <p class="title">{{props.title}}</p>
-      <p class="description">{{props.description}}</p>
+      <p class="title">{{ props.title }}</p>
+      <p class="description">{{ props.description }}</p>
     </div>
     <div class="cardRight">
       <div>
@@ -45,7 +46,7 @@ const handleEditCourse = () => router.push(`update/${props.id}`);
         </p>
       </div>
       <p class="cardButtons">
-        <RouterLink to="id">
+        <RouterLink :to="{ name: 'course-info', params: { id: props.id } }">
           <ButtonView :label="'SHOW COURSE'" :class-name="'cardShowButton'" />
         </RouterLink>
         <ButtonView

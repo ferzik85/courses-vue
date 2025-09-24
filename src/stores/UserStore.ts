@@ -27,6 +27,7 @@ export const useUserStore = defineStore("userStore", () => {
   const user = ref(defaultUser);
   const userName = computed(() => user.value.name);
   const isAdmin = computed(() => user.value.role?.toLowerCase() === "admin");
+  const isAuth = computed(() => user.value.isAuth);
 
   function login(u: User) {
     user.value = { ...u, isAuth: true };
@@ -43,5 +44,5 @@ export const useUserStore = defineStore("userStore", () => {
     }
   }
 
-  return { user, userName, isAdmin, login, logoutAsync };
+  return { user, isAuth, userName, isAdmin, login, logoutAsync };
 });

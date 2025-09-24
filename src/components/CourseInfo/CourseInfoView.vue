@@ -8,9 +8,9 @@ import { useCoursesStore } from "../../stores/CoursesStore";
 import { computed } from "vue";
 const coursesStore = useCoursesStore();
 const route = useRoute();
-const courseId = computed(() => route.params.courseId as string | undefined);
+const courseId = computed(() => route.params.id as string | undefined);
 const course = computed(() =>
-  courseId.value ? coursesStore.getCourseWithAuthorName(courseId.value) : null
+  courseId.value ? coursesStore.getCourseWithAuthorName(courseId.value) : null,
 );
 const courseIsFound = computed(() => course.value !== null);
 </script>

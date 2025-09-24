@@ -20,7 +20,7 @@ const courseId = computed(() => route.params.courseId as string | undefined);
 const isAddForm = computed(() => !courseId.value);
 const authors = authorStore.getAuthors;
 const courseToEdit = computed(() =>
-  courseId.value ? coursesStore.getCourse(courseId.value) : null
+  courseId.value ? coursesStore.getCourse(courseId.value) : null,
 );
 const title = ref(courseToEdit.value?.title ?? "");
 const description = ref(courseToEdit.value?.description ?? "");

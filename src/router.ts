@@ -17,21 +17,25 @@ const routes = [
     children: [
       {
         path: "",
+        name: "courses",
         component: CoursesView,
       },
       {
         path: "add",
+        name: "course-add",
         component: CourseFormView,
         meta: { requiresAdmin: true },
       },
       {
-        path: "update/:courseId",
+        path: "update/:id",
+        name: "course-update",
         component: CourseFormView,
         props: true,
         meta: { requiresAdmin: true },
       },
       {
-        path: ":courseId",
+        path: ":id",
+        name: "course-info",
         component: CourseInfoView,
         props: true,
       },

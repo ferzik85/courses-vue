@@ -1,23 +1,23 @@
 <script setup lang="ts">
 import { ref, computed } from "vue";
+import { useCoursesStore } from "../../stores/CoursesStore";
+import { useUserStore } from "../../stores/UserStore";
 import CourseCardView from "./components/CourseCard/CourseCardView.vue";
 import ButtonView from "../../common/Button/ButtonView.vue";
 import SearchBarView from "./components/SearchBar/SearchBarView.vue";
 import searchCourses from "../../utils/SearchCourses";
 import EmptyCourseListView from "../EmptyCourseList/EmptyCourseListView.vue";
-import { useCoursesStore } from "../../stores/CoursesStore";
-import { useUserStore } from "../../stores/UserStore";
 const coursesStore = useCoursesStore();
 const userStore = useUserStore();
-const coursesWithAuthorNames = coursesStore.getCoursesWithAuthorNames;
+const coursesWithAuthorNames =  computed(() => coursesStore.getCoursesWithAuthorNames);
 const isAdmin = computed(() => userStore.isAdmin);
 const searchText = ref("");
 const handleSearchClick = (searchValue: string) => {
   searchText.value = searchValue;
 };
-const noCourses = computed(() => coursesWithAuthorNames.length === 0);
+const noCourses = computed(() => coursesWithAuthorNames.value.length === 0);
 const filteredCourses = computed(() =>
-  searchCourses(searchText.value, coursesWithAuthorNames)
+  searchCourses(searchText.value, coursesWithAuthorNames.value),
 );
 </script>
 <template>
@@ -26,7 +26,7 @@ const filteredCourses = computed(() =>
     <template v-else>
       <div class="header">
         <SearchBarView :on-search-click="handleSearchClick" />
-        <RouterLink v-if="isAdmin" to="add">
+        <RouterLink v-if="isAdmin" :to="{ name: 'course-add'}">
           <ButtonView :label="'ADD NEW COURSE'" />
         </RouterLink>
       </div>
