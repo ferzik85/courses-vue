@@ -8,17 +8,17 @@ import ButtonView from "../../common/Button/ButtonView.vue";
 import LabeledInputView from "../../common/LabeledInput/LabeledInputView.vue";
 import ButtonInputView from "../../common/ButtonInput/ButtonInputView.vue";
 import DurationInputView from "../../common/DurationInput/DurationInputView.vue";
+import AuthorItemView from "./components/AuthorItem/AuthorItemView.vue";
 import { validateInput } from "../../utils/ValidateInput";
 import validateDuration from "../../utils/ValidateDuration";
-import AuthorItemView from "./components/AuthorItem/AuthorItemView.vue";
+const formId = "courseCreateOrEditForm";
 const router = useRouter();
 const route = useRoute();
 const coursesStore = useCoursesStore();
 const authorStore = useAuthorStore();
-const formId = "courseCreateOrEditForm";
-const courseId = computed(() => route.params.courseId as string | undefined);
+const courseId = computed(() => route.params.id as string | undefined);
 const isAddForm = computed(() => !courseId.value);
-const authors = authorStore.getAuthors;
+const authors = computed(() => authorStore.getAuthors);
 const courseToEdit = computed(() =>
   courseId.value ? coursesStore.getCourse(courseId.value) : null,
 );
@@ -29,15 +29,14 @@ const titleIsInvalid = ref(false);
 const descriptionIsInvalid = ref(false);
 const durationIsInvalid = ref(false);
 const courseAuthorIds = ref(courseToEdit.value?.authors ?? []);
-const courseAuthors = authors.filter((author) =>
+const courseAuthors = computed(() => authors.value.filter((author) =>
   courseAuthorIds.value.includes(author.id),
-);
+));
 const getCurrentDate = () =>
   new Date().toJSON().slice(0, 10).split("-").reverse().join("/");
 const validateInputForCourseForm = (value: string) =>
   validateInput(value) && value.length > 1;
-const courseAuthorListIsEmpty = courseAuthorIds.value.length === 0;
-
+const courseAuthorListIsEmpty = computed(() => courseAuthorIds.value.length === 0);
 const handleTitleChange = (value: string) => {
   title.value = value;
   titleIsInvalid.value = false;
@@ -60,7 +59,7 @@ const handleAddAuthorToCourse = (e: Event, authorId: string) => {
       (courseAuthorId) => courseAuthorId === authorId,
     ) != null;
   if (authorWithTheSameIdAlreadyExists) return;
-  const authorToAdd = authors.find((author: Author) => author.id === authorId);
+  const authorToAdd = authors.value.find((author: Author) => author.id === authorId);
   if (authorToAdd) {
     courseAuthorIds.value = [...courseAuthorIds.value, authorToAdd.id];
   }
@@ -116,7 +115,6 @@ function handleSubmitCourse(e: Event) {
   }
   router.push("/courses");
 }
-// missing style on create author button!
 </script>
 
 <template>
@@ -128,7 +126,7 @@ function handleSubmitCourse(e: Event) {
       <form
         :id="formId"
         class="submitForm"
-        @onSubmit.prevent="handleSubmitCourse"
+        @submit="handleSubmitCourse"
       >
         <p class="courseFormMain">Main Info</p>
         <LabeledInputView

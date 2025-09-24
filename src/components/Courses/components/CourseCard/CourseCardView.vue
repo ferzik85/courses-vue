@@ -21,7 +21,8 @@ const userStore = useUserStore();
 const coursesStore = useCoursesStore();
 const isAdmin = computed(() => userStore.isAdmin);
 const handleDeleteCourse = () => coursesStore.deleteCourseAsync(props.id);
-const handleEditCourse = () => router.push({ name: 'course-update', params: { id: props.id } });
+const handleEditCourse = () =>
+  router.push({ name: "course-update", params: { id: props.id } });
 </script>
 
 <template>

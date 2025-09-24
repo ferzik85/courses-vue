@@ -9,7 +9,9 @@ import searchCourses from "../../utils/SearchCourses";
 import EmptyCourseListView from "../EmptyCourseList/EmptyCourseListView.vue";
 const coursesStore = useCoursesStore();
 const userStore = useUserStore();
-const coursesWithAuthorNames =  computed(() => coursesStore.getCoursesWithAuthorNames);
+const coursesWithAuthorNames = computed(
+  () => coursesStore.getCoursesWithAuthorNames,
+);
 const isAdmin = computed(() => userStore.isAdmin);
 const searchText = ref("");
 const handleSearchClick = (searchValue: string) => {
@@ -26,7 +28,7 @@ const filteredCourses = computed(() =>
     <template v-else>
       <div class="header">
         <SearchBarView :on-search-click="handleSearchClick" />
-        <RouterLink v-if="isAdmin" :to="{ name: 'course-add'}">
+        <RouterLink v-if="isAdmin" :to="{ name: 'course-add' }">
           <ButtonView :label="'ADD NEW COURSE'" />
         </RouterLink>
       </div>

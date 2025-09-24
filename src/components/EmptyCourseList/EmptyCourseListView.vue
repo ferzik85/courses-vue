@@ -12,7 +12,7 @@ const isAdminUser = computed(() => userStore.isAdmin);
       Please use &apos;Add New Course&apos; button to add your first course
     </div>
     <div class="emptyListRow">
-      <RouterLink :to="{ name: 'course-add'}">
+      <RouterLink :to="{ name: 'course-add' }">
         <ButtonView label="ADD NEW COURSE" />
       </RouterLink>
     </div>
