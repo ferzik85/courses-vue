@@ -6,7 +6,9 @@ interface DurationProps {
   className?: string;
 }
 const props = defineProps<DurationProps>();
-const formattedDuration = computed(() => formatDuration(props.duration).split(" "));
+const formattedDuration = computed(() =>
+  formatDuration(props.duration).split(" "),
+);
 const formattedTime = computed(() => formattedDuration.value[0]);
 const formattedText = computed(() => formattedDuration.value[1]);
 </script>

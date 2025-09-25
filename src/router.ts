@@ -6,10 +6,7 @@ import CoursesView from "./components/Courses/CoursesView.vue";
 import CourseInfoView from "./components/CourseInfo/CourseInfoView.vue";
 import CourseFormView from "./components/CourseForm/CourseFormView.vue";
 import { useUserStore } from "./stores/UserStore";
-import {
-  userTokenIsSet,
-  getUser,
-} from "./localStorage/StorageAccess";
+import { userTokenIsSet, getUser } from "./localStorage/StorageAccess";
 
 const routes = [
   { path: "/", component: LoginView },
