@@ -6,6 +6,10 @@ import CoursesView from "./components/Courses/CoursesView.vue";
 import CourseInfoView from "./components/CourseInfo/CourseInfoView.vue";
 import CourseFormView from "./components/CourseForm/CourseFormView.vue";
 import { useUserStore } from "./stores/UserStore";
+import {
+  userTokenIsSet,
+  getUser,
+} from "./localStorage/StorageAccess";
 
 const routes = [
   { path: "/", component: LoginView },
@@ -50,6 +54,17 @@ const router = createRouter({
 });
 
 router.beforeEach((to, _from, next) => {
+  if (userTokenIsSet()) {
+    const user = getUser();
+    const userStore = useUserStore();
+    userStore.login({
+      isAuth: true,
+      name: user.name,
+      email: user.email,
+      token: user.token,
+      role: user.role,
+    });
+  }
   if (to.meta.requiresAdmin) {
     const userStore = useUserStore();
     if (!userStore.isAdmin) return next("/login");

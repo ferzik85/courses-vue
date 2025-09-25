@@ -13,7 +13,7 @@ export interface DurationInputProps {
 }
 
 const props = defineProps<DurationInputProps>();
-
+const duration = computed(() => props.duration);
 const handleChange = (value: string) => {
   let val = value;
   if (!validateDuration(value)) val = "";
@@ -32,7 +32,7 @@ const inputClasses = computed<string>(() => {
     {{ props.name }}
     <div>
       <InputView
-        :value="String(duration)"
+        :value="String(props.duration)"
         :on-change="handleChange"
         :class-name="inputClasses"
       />
