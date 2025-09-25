@@ -6,7 +6,7 @@ import logo from "../../assets/epam-logo.svg";
 import { useUserStore } from "../../stores/UserStore";
 const userStore = useUserStore();
 const isAuth = computed(() => userStore.isAuth);
-const userName = userStore.userName;
+const userName = computed(() => userStore.userName);
 const router = useRouter();
 const logout = () => {
   userStore.logoutAsync().then(() => {
@@ -55,16 +55,16 @@ const logout = () => {
   font-weight: bold;
 }
 
-.button {
+:deep(.button) {
   display: flex;
   margin-left: auto;
-  margin-top: 10px;
+  margin-top: 0px;
   color: white;
   margin-right: 10px;
   align-items: center;
 }
 
-.button span {
+:deep(.button span) {
   color: black;
   margin-right: 20px;
   font-size: 16px;

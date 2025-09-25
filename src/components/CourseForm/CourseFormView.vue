@@ -29,14 +29,16 @@ const titleIsInvalid = ref(false);
 const descriptionIsInvalid = ref(false);
 const durationIsInvalid = ref(false);
 const courseAuthorIds = ref(courseToEdit.value?.authors ?? []);
-const courseAuthors = computed(() => authors.value.filter((author) =>
-  courseAuthorIds.value.includes(author.id),
-));
+const courseAuthors = computed(() =>
+  authors.value.filter((author) => courseAuthorIds.value.includes(author.id)),
+);
 const getCurrentDate = () =>
   new Date().toJSON().slice(0, 10).split("-").reverse().join("/");
 const validateInputForCourseForm = (value: string) =>
   validateInput(value) && value.length > 1;
-const courseAuthorListIsEmpty = computed(() => courseAuthorIds.value.length === 0);
+const courseAuthorListIsEmpty = computed(
+  () => courseAuthorIds.value.length === 0,
+);
 const handleTitleChange = (value: string) => {
   title.value = value;
   titleIsInvalid.value = false;
@@ -59,7 +61,9 @@ const handleAddAuthorToCourse = (e: Event, authorId: string) => {
       (courseAuthorId) => courseAuthorId === authorId,
     ) != null;
   if (authorWithTheSameIdAlreadyExists) return;
-  const authorToAdd = authors.value.find((author: Author) => author.id === authorId);
+  const authorToAdd = authors.value.find(
+    (author: Author) => author.id === authorId,
+  );
   if (authorToAdd) {
     courseAuthorIds.value = [...courseAuthorIds.value, authorToAdd.id];
   }
@@ -123,11 +127,7 @@ function handleSubmitCourse(e: Event) {
       {{ isAddForm ? "Create Course" : "Edit Course" }}
     </h3>
     <div class="courseFormBody">
-      <form
-        :id="formId"
-        class="submitForm"
-        @submit="handleSubmitCourse"
-      >
+      <form :id="formId" class="submitForm" @submit="handleSubmitCourse">
         <p class="courseFormMain">Main Info</p>
         <LabeledInputView
           :name="'Title'"
@@ -310,7 +310,13 @@ function handleSubmitCourse(e: Event) {
   width: 1104px;
 }
 
-:deep(.createButton, .cancelButton) {
+:deep(.createButton) {
+  height: 50px;
+  font-size: 16px;
+  float: right;
+}
+
+:deep(.cancelButton) {
   height: 50px;
   font-size: 16px;
   float: right;

@@ -11,13 +11,13 @@ const formattedText = formattedDuration[1];
 </script>
 
 <template>
-  <span class="duration" :class="props.className">
+  <span class="spanDuration" :class="props.className">
     <b>{{ formattedTime }}</b> {{ formattedText }}
   </span>
 </template>
 
 <style scoped>
-.duration {
+.spanDuration {
   font-weight: 400;
 }
 </style>

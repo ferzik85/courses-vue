@@ -53,7 +53,7 @@ const inputClasses = computed<string>(() => {
   flex-direction: column;
 }
 
-.durationInput {
+:deep(.durationInput) {
   padding-top: 0;
   padding-bottom: 0;
   height: 48px;
@@ -66,11 +66,11 @@ const inputClasses = computed<string>(() => {
   font-weight: 400;
 }
 
-.errorBorder {
+:deep(.errorBorder) {
   border-color: red;
 }
 
-.durationHours {
+:deep(.durationHours) {
   margin-left: 15px;
 }
 </style>
